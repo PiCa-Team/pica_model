@@ -141,4 +141,4 @@ polygon = [np.array([[0,0],[0,718], [1000, 718], [785,0]]),
            np.array([[150, 1],[288, 1],[370, 355],[1, 359]])]
 # 영역 좌표 입력 [동영상1, 동영상2, ...] numpy 배열로 입력할 것
 
-make_result(polygon, TEST_VIDEO_FOLDER_PATH, CLASS_ID, LINE_START, LINE_END)
+make_result(polygon, TEST_VIDEO_FOLDER_PATH, CLASS_ID, LINE_START, LINE_END, model)
