@@ -72,7 +72,7 @@ class BYTETrackerArgs:
     min_box_area: float = 1.0
     mot20: bool = False
 
-def make_result(polygon, TEST_VIDEO_FOLDER_PATH, CLASS_ID, LINE_START, LINE_END):
+def make_result(polygon, TEST_VIDEO_FOLDER_PATH, CLASS_ID, LINE_START, LINE_END, model):
     
     video_list = os.listdir(TEST_VIDEO_FOLDER_PATH)
     for idx, (poly, video) in enumerate(zip(polygon,video_list)) :
@@ -88,7 +88,7 @@ def make_result(polygon, TEST_VIDEO_FOLDER_PATH, CLASS_ID, LINE_START, LINE_END)
         line_annotator = LineZoneAnnotator(thickness=1, text_thickness=1, text_scale=1, text_padding=3, text_offset=2.0, color = Color.black(), text_color=Color.white())
         
         
-        def process_frame(frame: np.ndarray, _,CLASS_ID) -> np.ndarray:
+        def process_frame(frame: np.ndarray, _,CLASS_ID, model) -> np.ndarray:
     
             # detect
             results = model(frame, imgsz=640)[0]
@@ -124,12 +124,14 @@ def make_result(polygon, TEST_VIDEO_FOLDER_PATH, CLASS_ID, LINE_START, LINE_END)
 
             return frame, in_count, out_count, count
         
-        process_video(source_path = TEST_VIDEO_FOLDER_PATH + video, save_folder = './result_video', target_path = f'./result_video/result_{video}', callback = process_frame, CLASS_ID = CLASS_ID)
+        process_video(source_path = TEST_VIDEO_FOLDER_PATH + video, save_folder = './result_video', target_path = f'./result_video/result_{video}', callback = process_frame, CLASS_ID = CLASS_ID, model = model)
 
     from IPython import display
     display.clear_output()
 
-model = YOLO('best.pt') # 모델 경로 입력하기
+
+########################이부분을 받아야됩니다.#########################
+model = YOLO('l_best.pt') # 모델 경로 입력하기
 TEST_VIDEO_FOLDER_PATH = './test_data/' # 비디오 폴더 경로 입력
 CLASS_ID = [0] # 머리만 detection
 LINE_START = [Point(785, 0), Point(288, 0)] # 기준선 좌표 입력 [동영상1, 동영상2, ...]

@@ -131,7 +131,8 @@ def process_video(
     save_folder : str,
     target_path: str,
     callback: Callable[[np.ndarray, int], np.ndarray],
-    CLASS_ID
+    CLASS_ID,
+    model
 ) -> None:
     """
     Process a video file by applying a callback function on each frame and saving the result to a target video file.
@@ -166,7 +167,7 @@ def process_video(
         for index, frame in enumerate(
             get_video_frames_generator(source_path=source_path)
         ):
-            result_frame, in_count, out_count, count = callback(frame, index, CLASS_ID)
+            result_frame, in_count, out_count, count = callback(frame, index, CLASS_ID, model)
             sink.write_frame(frame=result_frame)
             
             if index == 0 :
