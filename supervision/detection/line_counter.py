@@ -141,8 +141,8 @@ class LineZoneAnnotator:
             lineType=cv2.LINE_AA,
         )
 
-        in_text = f"in: {line_counter.in_count}"
-        out_text = f"out: {line_counter.out_count}"
+        in_text = f"IN: {line_counter.in_count}"
+        out_text = f"OUT: {line_counter.out_count}"
 
         (in_text_width, in_text_height), _ = cv2.getTextSize(
             in_text, cv2.FONT_HERSHEY_SIMPLEX, self.text_scale, self.text_thickness
