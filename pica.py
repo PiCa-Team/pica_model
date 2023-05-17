@@ -126,8 +126,7 @@ def make_result(polygon, TEST_VIDEO_FOLDER_PATH, CLASS_ID, LINE_START, LINE_END,
         
         process_video(source_path = TEST_VIDEO_FOLDER_PATH + video, save_folder = './result_video', target_path = f'./result_video/result_{video}', callback = process_frame, CLASS_ID = CLASS_ID, model = model)
 
-    from IPython import display
-    display.clear_output()
+    
 
 
 ########################이부분을 받아야됩니다.#########################
