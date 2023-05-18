@@ -7,6 +7,7 @@ import cv2
 import numpy as np
 import pandas as pd
 import os
+from density import density 
 
 @dataclass
 class VideoInfo:
@@ -126,6 +127,8 @@ def get_video_frames_generator(source_path: str) -> Generator[np.ndarray, None, 
     video.release()
 
 
+# 승강장 면적
+thresholds = 50
 def process_video(
     source_path: str,
     save_folder : str,
@@ -180,16 +183,16 @@ def process_video(
             # df.loc[index, 'COUNT'] = count
             # df = df.reset_index().drop(['index'], axis = 1)
             # df.to_csv('./count.csv', index = False)
-            
+            d, density_degree = density(max_count, thresholds)
         try : 
             result = pd.read_csv('./result.csv')
             idx = len(result)
-            result.loc[idx, :] = [in_count, out_count, max_count]
+            result.loc[idx, :] = [in_count, out_count, max_count, d, density_degree]
             result = result.reset_index().drop(['index'], axis =1 )
             result.to_csv('./result.csv', index = False)
         
         except :
-            result = pd.DataFrame([in_count,out_count, max_count], index = ['IN', 'OUT','MAX COUNT']).T
+            result = pd.DataFrame([in_count,out_count, max_count, d, density_degree], index = ['IN', 'OUT','MAX COUNT','DENSITY','DENSITY_DEGREE']).T
             result = result.reset_index().drop(['index'], axis = 1)
             
             result.to_csv('./result.csv', index = False)
