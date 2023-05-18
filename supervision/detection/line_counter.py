@@ -151,25 +151,31 @@ class LineZoneAnnotator:
             out_text, cv2.FONT_HERSHEY_SIMPLEX, self.text_scale, self.text_thickness
         )
 
-        in_text_x = int(
-            (line_counter.vector.end.x + line_counter.vector.start.x - in_text_width)
-            / 2
-        )
-        in_text_y = int(
-            (line_counter.vector.end.y + line_counter.vector.start.y + in_text_height)
-            / 2
-            - self.text_offset * in_text_height
-        )
+        # in_text_x = int(
+        #     (line_counter.vector.end.x + line_counter.vector.start.x - in_text_width)
+        #     / 2
+        # )
+        in_text_x = 10
+        
+        # in_text_y = int(
+        #     (line_counter.vector.end.y + line_counter.vector.start.y + in_text_height)
+        #     / 2
+        #     - self.text_offset * in_text_height
+        # )
+        in_text_y = 40
 
-        out_text_x = int(
-            (line_counter.vector.end.x + line_counter.vector.start.x - out_text_width)
-            / 2
-        )
-        out_text_y = int(
-            (line_counter.vector.end.y + line_counter.vector.start.y + out_text_height)
-            / 2
-            + self.text_offset * out_text_height
-        )
+        # out_text_x = int(
+        #     (line_counter.vector.end.x + line_counter.vector.start.x - out_text_width)
+        #     / 2
+        # )
+        out_text_x = 10
+        
+        # out_text_y = int(
+        #     (line_counter.vector.end.y + line_counter.vector.start.y + out_text_height)
+        #     / 2
+        #     + self.text_offset * out_text_height
+        # )
+        out_text_y = 70
 
         in_text_background_rect = Rect(
             x=in_text_x,

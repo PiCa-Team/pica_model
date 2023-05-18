@@ -7,7 +7,9 @@ import cv2
 import numpy as np
 import pandas as pd
 import os
-from density import density 
+from density import density
+
+
 
 @dataclass
 class VideoInfo:
@@ -125,7 +127,6 @@ def get_video_frames_generator(source_path: str) -> Generator[np.ndarray, None, 
         yield frame
         success, frame = video.read()
     video.release()
-
 
 # 승강장 면적
 thresholds = 50

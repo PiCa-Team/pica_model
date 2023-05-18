@@ -84,7 +84,7 @@ def make_result(polygon, TEST_VIDEO_PATH, CLASS_ID, LINE_START, LINE_END, model)
 
     # initiate annotators
     # box_annotator = BoxAnnotator(thickness=1, text_thickness=0, text_scale=0, text_padding=0)
-    zone_annotator = PolygonZoneAnnotator(zone=zone, color=Color.black(), thickness=1, text_thickness=1, text_scale=1, text_padding=0, text_color=Color.white())
+    zone_annotator = PolygonZoneAnnotator(zone=zone, color=Color.black(), thickness=1, text_thickness=1, text_scale=1, text_padding=3, text_color=Color.white())
     line_annotator = LineZoneAnnotator(thickness=1, text_thickness=1, text_scale=1, text_padding=3, text_offset=2.0, color = Color.black(), text_color=Color.white())
     
     

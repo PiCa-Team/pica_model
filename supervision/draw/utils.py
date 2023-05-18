@@ -149,8 +149,8 @@ def draw_text(
         thickness=text_thickness,
     )[0]
     text_rect = Rect(
-        x=text_anchor.x - text_width // 2,
-        y=text_anchor.y - text_height // 2,
+        x=text_anchor.x ,
+        y=text_anchor.y -text_height,
         width=text_width,
         height=text_height,
     ).pad(text_padding)
@@ -163,7 +163,7 @@ def draw_text(
     cv2.putText(
         img=scene,
         text=text,
-        org=(text_anchor.x - text_width // 2, text_anchor.y + text_height // 2),
+        org=(text_anchor.x , text_anchor.y ),
         fontFace=text_font,
         fontScale=text_scale,
         color=text_color.as_bgr(),

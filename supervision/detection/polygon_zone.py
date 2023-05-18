@@ -9,7 +9,7 @@ from supervision.draw.color import Color
 from supervision.draw.utils import draw_polygon, draw_text
 from supervision.geometry.core import Position
 from supervision.geometry.utils import get_polygon_center
-
+from supervision.geometry.core import Point
 
 class PolygonZone:
     def __init__(
@@ -67,8 +67,8 @@ class PolygonZoneAnnotator:
 
         annotated_frame = draw_text(
             scene=annotated_frame,
-            text=str(self.zone.current_count) if label is None else label,
-            text_anchor=self.center,
+            text='COUNT: '+str(self.zone.current_count) if label is None else label,
+            text_anchor=Point(10,100),
             background_color=self.color,
             text_color=self.text_color,
             text_scale=self.text_scale,
