@@ -67,9 +67,9 @@ class PolygonZoneAnnotator:
 
         annotated_frame = draw_text(
             scene=annotated_frame,
-            text='COUNT: '+str(self.zone.current_count) if label is None else label,
+            text='CNT: '+str(self.zone.current_count) if label is None else label,
             text_anchor=Point(10,100),
-            background_color=self.color,
+            background_color=Color.black(),
             text_color=self.text_color,
             text_scale=self.text_scale,
             text_thickness=self.text_thickness,

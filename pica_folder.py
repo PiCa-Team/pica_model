@@ -84,8 +84,8 @@ def make_result(polygon, TEST_VIDEO_FOLDER_PATH, CLASS_ID, LINE_START, LINE_END,
 
         # initiate annotators
         # box_annotator = BoxAnnotator(thickness=1, text_thickness=0, text_scale=0, text_padding=0)
-        zone_annotator = PolygonZoneAnnotator(zone=zone, color=Color.black(), thickness=1, text_thickness=1, text_scale=1, text_padding=3, text_color=Color.white())
-        line_annotator = LineZoneAnnotator(thickness=1, text_thickness=1, text_scale=1, text_padding=3, text_offset=2.0, color = Color.black(), text_color=Color.white())
+        zone_annotator = PolygonZoneAnnotator(zone=zone, color=Color.green(), thickness=2, text_thickness=1, text_scale=1, text_padding=3, text_color=Color.white())
+        line_annotator = LineZoneAnnotator(thickness=2, text_thickness=1, text_scale=1, text_padding=3, text_offset=2.0, color = Color.black(), text_color=Color.white())
         
         
         def process_frame(frame: np.ndarray, _,CLASS_ID, model) -> np.ndarray:
@@ -130,14 +130,18 @@ def make_result(polygon, TEST_VIDEO_FOLDER_PATH, CLASS_ID, LINE_START, LINE_END,
 
 
 ########################이부분을 받아야됩니다.#########################
-model = YOLO('new_best.pt') # 모델 경로 입력하기
+model = YOLO('l_best.pt') # 모델 경로 입력하기
 TEST_VIDEO_FOLDER_PATH = './test_data/' # 비디오 폴더 경로 입력
 CLASS_ID = [0] # 머리만 detection
-LINE_START = [Point(785, 0), Point(288, 0)] # 기준선 좌표 입력 [동영상1, 동영상2, ...]
-LINE_END = [Point(1000, 718), Point(370, 355)]
+LINE_START = [Point(0,720), Point(350, 360), Point(288, 0), Point(785, 0), Point(720, 250)] # 기준선 좌표 입력 [동영상1, 동영상2, ...]
+LINE_END = [Point(260,80), Point(260, 0), Point(370, 355), Point(1000, 718),  Point(350,1080)]
 
-polygon = [np.array([[0,0],[0,718], [1000, 718], [785,0]]),
-           np.array([[150, 1],[288, 1],[370, 355],[1, 359]])]
+polygon = [np.array([[260,80], [0,720], [406,720], [406,180]]),
+           np.array([[350,360], [260,0], [0,0], [0,360]]),
+           np.array([[150, 0],[288, 0],[370, 355],[0, 359]]),
+           np.array([[0,0],[0,718], [1000, 718], [785,0]]),
+           np.array([[720,250],[350,1080], [0, 1080], [0,200],[700, 200]])
+           ]
 # 영역 좌표 입력 [동영상1, 동영상2, ...] numpy 배열로 입력할 것
 
 make_result(polygon, TEST_VIDEO_FOLDER_PATH, CLASS_ID, LINE_START, LINE_END, model)

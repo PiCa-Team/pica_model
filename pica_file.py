@@ -84,8 +84,8 @@ def make_result(polygon, TEST_VIDEO_PATH, CLASS_ID, LINE_START, LINE_END, model)
 
     # initiate annotators
     # box_annotator = BoxAnnotator(thickness=1, text_thickness=0, text_scale=0, text_padding=0)
-    zone_annotator = PolygonZoneAnnotator(zone=zone, color=Color.black(), thickness=1, text_thickness=1, text_scale=1, text_padding=3, text_color=Color.white())
-    line_annotator = LineZoneAnnotator(thickness=1, text_thickness=1, text_scale=1, text_padding=3, text_offset=2.0, color = Color.black(), text_color=Color.white())
+    zone_annotator = PolygonZoneAnnotator(zone=zone, color=Color.green(), thickness=2, text_thickness=1, text_scale=1, text_padding=3, text_color=Color.white())
+    line_annotator = LineZoneAnnotator(thickness=2, text_thickness=1, text_scale=1, text_padding=3, text_offset=2.0, color = Color.black(), text_color=Color.white())
     
     
     def process_frame(frame: np.ndarray, _,CLASS_ID, model) -> np.ndarray:
@@ -131,12 +131,12 @@ def make_result(polygon, TEST_VIDEO_PATH, CLASS_ID, LINE_START, LINE_END, model)
 
 ########################이부분을 받아야됩니다.#########################
 model = YOLO('l_best.pt') # 모델 경로 입력하기
-TEST_VIDEO_PATH = './test2.mp4' # 비디오 파일 경로 입력
+TEST_VIDEO_PATH = '../subway_station/test1.mp4' # 비디오 파일 경로 입력
 CLASS_ID = [0] # 머리만 detection
-LINE_START = Point(288, 0) # 기준선 좌표 입력 
-LINE_END = Point(370, 355)
+LINE_START = Point(0,720) # 기준선 좌표 입력 
+LINE_END = Point(260,80)
 
-polygon = np.array([[150, 1],[288, 1],[370, 355],[1, 359]])
+polygon = np.array([[260,80], [0,720], [406,720], [406,180]])
 # 영역 좌표 입력 numpy 배열로 입력할 것
 
 make_result(polygon, TEST_VIDEO_PATH, CLASS_ID, LINE_START, LINE_END, model)
