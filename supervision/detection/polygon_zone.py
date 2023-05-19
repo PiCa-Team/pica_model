@@ -65,6 +65,7 @@ class PolygonZoneAnnotator:
             thickness=self.thickness,
         )
 
+        # 상자 위치 조절 및 텍스트 입력 부분
         annotated_frame = draw_text(
             scene=annotated_frame,
             text='CNT: '+str(self.zone.current_count) if label is None else label,

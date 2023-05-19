@@ -162,21 +162,26 @@ def process_video(
     """
     source_video_info = VideoInfo.from_video_path(video_path=source_path)
     
+    # save_folder 없으면 save_folder 만들어주기
     if not os.path.exists(save_folder) :
         os.mkdir(save_folder)
     
     # df = pd.DataFrame(columns=['COUNT'])
+    # 초기 max_count 0으로 설정
     max_count = 0
     with VideoSink(target_path=target_path, video_info=source_video_info) as sink:
         for index, frame in enumerate(
             get_video_frames_generator(source_path=source_path)
         ):
             result_frame, in_count, out_count, count = callback(frame, index, CLASS_ID, model)
+            # callback : proccess_frame
             sink.write_frame(frame=result_frame)
             
+            # 첫 프레임에서는 max_count가 처음 값
             if index == 0 :
                 max_count = count
             
+            # count가 max_count보다 높아지면 max_count를 count로 업데이트
             else :
                 if max_count < count :
                     max_count = count
@@ -184,7 +189,11 @@ def process_video(
             # df.loc[index, 'COUNT'] = count
             # df = df.reset_index().drop(['index'], axis = 1)
             # df.to_csv('./count.csv', index = False)
+            
+            # density 함수 사용하여 밀집도 기준 뽑아내기
             d, density_degree = density(max_count, thresholds)
+        
+        # result.csv가 있으면 그 파일을 열어 데이터 누적
         try : 
             result = pd.read_csv('./result.csv')
             idx = len(result)
@@ -192,6 +201,7 @@ def process_video(
             result = result.reset_index().drop(['index'], axis =1 )
             result.to_csv('./result.csv', index = False)
         
+        # result.csv가 없으면 데이터 프레임 새로 만들어서 result.csv로 저장
         except :
             result = pd.DataFrame([in_count,out_count, max_count, d, density_degree], index = ['IN', 'OUT','MAX COUNT','DENSITY','DENSITY_DEGREE']).T
             result = result.reset_index().drop(['index'], axis = 1)

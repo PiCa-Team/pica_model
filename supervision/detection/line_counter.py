@@ -70,7 +70,8 @@ class LineZone:
             else:
                 self.out_count += 1
         return self.in_count, self.out_count
-
+        # 리턴 값이 없던 것을 받게 해주기
+        
 class LineZoneAnnotator:
     def __init__(
         self,
@@ -141,6 +142,7 @@ class LineZoneAnnotator:
             lineType=cv2.LINE_AA,
         )
 
+        # 승하차 계수 텍스트 
         in_text = f"IN: {line_counter.in_count}"
         out_text = f"OUT: {line_counter.out_count}"
 
@@ -151,6 +153,8 @@ class LineZoneAnnotator:
             out_text, cv2.FONT_HERSHEY_SIMPLEX, self.text_scale, self.text_thickness
         )
 
+        #### 텍스트 상자 위치 조절 부분 ####
+        
         # in_text_x = int(
         #     (line_counter.vector.end.x + line_counter.vector.start.x - in_text_width)
         #     / 2
